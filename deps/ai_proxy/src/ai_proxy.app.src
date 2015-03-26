@@ -1,0 +1,12 @@
+{application, ai_proxy,
+ [
+  {description, "Asia Innovation proxy server"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { ai_proxy_app, []}},
+  {env, []}
+ ]}.

@@ -1,0 +1,71 @@
+{application, ai_api,
+ [
+  {description, "Asia Innovation Api"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [kernel, stdlib, pooler]},
+  {mod, { ai_api_app, []}},
+  {env, [{pools, [
+%% poolboy configuration
+%%    {service, [
+%%      {size, 100},
+%%      {max_overflow, 100000},
+%%      {strategy, lifo},
+%%      {worker_module, ai_api_worker}
+%%    ]},
+%%    {mongo, [
+%%      {size, 50},
+%%      {max_overflow, 50000},
+%%      {strategy, lifo},
+%%      {worker_module, ai_api_worker}
+%%    ]},
+%%    {apns, [
+%%      {size, 40},
+%%      {max_overflow, 40000},
+%%      {strategy, lifo},
+%%      {worker_module, ai_api_worker}
+%%    ]},
+%%    {router, [
+%%      {size, 10},
+%%      {max_overflow, 10000},
+%%      {strategy, lifo},
+%%      {worker_module, ai_api_worker}
+%%    ]},
+%%    {robot, [
+%%      {size, 10},
+%%      {max_overflow, 10000},
+%%      {strategy, lifo},
+%%      {worker_module, ai_api_worker}
+%%    ]}
+%% poolboy configuration
+
+%% pooler configuration
+    [{name, service},
+      {max_count, 10000},
+      {init_count, 100},
+      {start_mfa,
+        {ai_api_worker, start_link, [service]}}],
+    [{name, mongo},
+      {max_count, 5000},
+      {init_count, 50},
+      {start_mfa,
+        {ai_api_worker, start_link, [mongo]}}],
+    [{name, apns},
+      {max_count, 4000},
+      {init_count, 40},
+      {start_mfa,
+        {ai_api_worker, start_link, [apns]}}],
+    [{name, router},
+      {max_count, 1000},
+      {init_count, 10},
+      {start_mfa,
+        {ai_api_worker, start_link, [router]}}],
+    [{name, robot},
+      {max_count, 1000},
+      {init_count, 10},
+      {start_mfa,
+        {ai_api_worker, start_link, [robot]}}]
+%% pooler configuration
+
+  ]}]}
+ ]}.
